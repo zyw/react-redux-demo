@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { getAllTips,fetchTips } from "./action/actions";
 import Footer from './component/footer';
 import Loading from './component/loading';
-import Header from './component/header'
+import Header from './component/header';
+import Topics from './component/topics';
 
 class App extends Component {
 	constructor(props){
@@ -26,22 +27,11 @@ class App extends Component {
 
 	render(){
 		const { dispatch,tipsList,isLoading } = this.props;
-		const tipsLi = tipsList.map((tip)=>{
-			return (<li key={tip.id} className="aui-list-view-cell aui-img">
-		                <img className="aui-img-object aui-pull-right" src={tip.author.avatar_url}/>
-		                <div className="aui-img-body">
-		                    {tip.title}
-		                    <p className='aui-ellipsis-2'>{tip.content}</p>
-		                </div>
-		            </li>);
-		});
 		return (
 			<div className="aui-content">
 				<Header title={this.state.title} />
 				<Loading isShow={ isLoading }/>
-	      <ul className="aui-list-view content">
-	      	{tipsLi}
-	      </ul>
+				<Topics tipsList={ tipsList }/>
 	      <Footer onChangeTabs={ this._changeTabs.bind(this) }/>
 		  </div>
 		);

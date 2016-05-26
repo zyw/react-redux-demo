@@ -9,6 +9,6 @@ export default class Header extends Component {
   }
 }
 
-Header.props = {
+Header.propTypes = {
   title:PropTypes.string.isRequired
 }
