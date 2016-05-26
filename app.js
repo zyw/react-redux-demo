@@ -1,8 +1,9 @@
 import React, { Component,PropTypes } from "react";
 import { connect } from "react-redux";
 import { getAllTips,fetchTips } from "./action/actions";
-import Footer from './component/footer'
-import Loading from './component/loading'
+import Footer from './component/footer';
+import Loading from './component/loading';
+import Header from './component/header'
 
 class App extends Component {
 	constructor(props){
@@ -36,7 +37,7 @@ class App extends Component {
 		});
 		return (
 			<div className="aui-content">
-				<header className="aui-bar aui-bar-nav aui-bar-dark fixed">{this.state.title}</header>
+				<Header title={this.state.title} />
 				<Loading isShow={ isLoading }/>
 	      <ul className="aui-list-view content">
 	      	{tipsLi}
