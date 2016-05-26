@@ -9,7 +9,7 @@ export default class Topics extends Component {
   render(){
     const { tipsList } = this.props;
     const tipsLi = tipsList.map((tip)=>{
-			return (<TopicItem topic={ tip } />);
+			return (<TopicItem key={tip.id} topic={ tip } />);
 		});
     return (
       <ul className="aui-list-view content">
