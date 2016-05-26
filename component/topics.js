@@ -7,9 +7,9 @@ export default class Topics extends Component {
   }
 
   render(){
-    const { tipsList } = this.props;
+    const { tipsList,onShowDetail } = this.props;
     const tipsLi = tipsList.map((tip)=>{
-			return (<TopicItem key={tip.id} topic={ tip } />);
+			return (<TopicItem key={tip.id} topic={ tip } onShowDetail={ onShowDetail } />);
 		});
     return (
       <ul className="aui-list-view content">
@@ -17,8 +17,4 @@ export default class Topics extends Component {
       </ul>
     );
   }
-}
-
-Topics.propTypes = {
-  tipsList:PropTypes.array.isRequired
 }

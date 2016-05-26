@@ -20,33 +20,52 @@ class App extends Component {
 
 	_changeTabs(label,mark){
 		const { dispatch } = this.props
-		console.log(label + "--" + mark);
 		this.setState({title:label});
+		this.context.router.push('/');
 		dispatch(fetchTips(mark));
 	}
 
+	_showDetail(topicId){
+		this.context.router.push('/detail/'+topicId);
+	}
+
 	render(){
-		const { dispatch,tipsList,isLoading } = this.props;
+		const { dispatch,tipsList,isLoading,topic } = this.props;
 		return (
 			<div className="aui-content">
 				<Header title={this.state.title} />
 				<Loading isShow={ isLoading }/>
-				<Topics tipsList={ tipsList }/>
+				{/* 路由组件传递参数写法 */}
+				{this.props.children && React.cloneElement(this.props.children, {
+	              tipsList: tipsList,
+								onShowDetail: this._showDetail.bind(this),
+								dispatch:dispatch,
+								topic:topic
+	            })}
+
 	      <Footer onChangeTabs={ this._changeTabs.bind(this) }/>
 		  </div>
 		);
 	}
 }
 
+
 App.propTypes = {
 	tipsList:PropTypes.array.isRequired,
-	isLoading:PropTypes.bool.isRequired
+	isLoading:PropTypes.bool.isRequired,
+	topic:PropTypes.object.isRequired
+}
+
+//获得router需要设置
+App.contextTypes = {
+	router:React.PropTypes.object.isRequired
 }
 
 function select(state){
 	return {
 		tipsList:state.tips,
-		isLoading:state.isLoading
+		isLoading:state.isLoading,
+		topic:state.topic
 	}
 }
 

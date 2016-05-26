@@ -1,3 +1,7 @@
 export const POSTS_TIPS = "POSTS_TIPS";
 
 export const POSTS_SUCCESS = "POSTS_SUCCESS";
+
+export const POSTS_TOPIC = "POSTS_TOPIC";
+
+export const POSTS_TOPIC_SUCCESS = "POSTS_TOPIC_SUCCESS";

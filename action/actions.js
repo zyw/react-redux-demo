@@ -1,7 +1,7 @@
-import {POSTS_TIPS,POSTS_SUCCESS} from './actionTypes';
+import {POSTS_TIPS,POSTS_SUCCESS,POSTS_TOPIC,POSTS_TOPIC_SUCCESS} from './actionTypes';
 import fetch from 'isomorphic-fetch'
 
-export function getAllTips(){
+function getAllTips(){
 	return {
 		type: POSTS_TIPS,
 		tips:[],
@@ -9,7 +9,7 @@ export function getAllTips(){
 	}
 }
 
-export function getTipsSuccess(tipsList){
+function getTipsSuccess(tipsList){
 	return {
 		type: POSTS_SUCCESS,
 		tips:tipsList,
@@ -23,5 +23,29 @@ export function fetchTips(tab="all"){
 		return fetch("https://cnodejs.org/api/v1/topics?mdrender=false&tab="+tab)
 					 .then(response => response.json())
 					 .then(json => dispache(getTipsSuccess(json.data)));
+	}
+}
+
+function getTopicById(){
+	return {
+		type:POSTS_TOPIC,
+		topic:{},
+		isLoading:true
+	}
+}
+function getTopicByIdSuccess(topic){
+	return {
+		type:POSTS_TOPIC_SUCCESS,
+		topic:topic,
+		isLoading:false
+	}
+}
+
+export function fetchTopic(topicId){
+	return function(dispache){
+		dispache(getTopicById());
+		return fetch("https://cnodejs.org/api/v1/topic/"+topicId)
+					 .then(response => response.json())
+					 .then(json => dispache(getTopicByIdSuccess(json.data)));
 	}
 }

@@ -6,9 +6,9 @@ export default class TopicItem extends Component {
   }
 
   render(){
-    const { topic } = this.props
+    const { topic,onShowDetail } = this.props
     return (
-      <li className="aui-list-view-cell aui-img">
+      <li className="aui-list-view-cell aui-img" onClick={ () => onShowDetail(topic.id) }>
           <img className="aui-img-object aui-pull-right" src={topic.author.avatar_url}/>
           <div className="aui-img-body">
               {topic.title}
