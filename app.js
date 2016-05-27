@@ -10,7 +10,8 @@ class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			title:'首页'
+			title:'首页',
+			isShow:false
 		}
 	}
 	componentDidMount(){
@@ -27,22 +28,28 @@ class App extends Component {
 
 	_showDetail(topicId){
 		this.context.router.push('/detail/'+topicId);
+		this.setState({isShow:true});
+	}
+	_onBack(){
+		this.props.history.goBack();
+		this.setState({isShow:false});
 	}
 
 	render(){
 		const { dispatch,tipsList,isLoading,topic } = this.props;
 		return (
 			<div className="aui-content">
-				<Header title={this.state.title} />
+				<Header title={ this.state.title } onBack={ this._onBack.bind(this) } isShow={ this.state.isShow }/>
 				<Loading isShow={ isLoading }/>
-				{/* 路由组件传递参数写法 */}
-				{this.props.children && React.cloneElement(this.props.children, {
-	              tipsList: tipsList,
-								onShowDetail: this._showDetail.bind(this),
-								dispatch:dispatch,
-								topic:topic
-	            })}
 
+					{/* 路由组件传递参数写法 */}
+					{this.props.children && React.cloneElement(this.props.children, {
+		              tipsList: tipsList,
+									onShowDetail: this._showDetail.bind(this),
+									dispatch:dispatch,
+									topic:topic
+		            })}
+								
 	      <Footer onChangeTabs={ this._changeTabs.bind(this) }/>
 		  </div>
 		);

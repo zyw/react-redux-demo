@@ -12,9 +12,11 @@ export default class Topics extends Component {
 			return (<TopicItem key={tip.id} topic={ tip } onShowDetail={ onShowDetail } />);
 		});
     return (
-      <ul className="aui-list-view content">
-        {tipsLi}
-      </ul>
+      <div className="aui-content content">
+        <ul className="aui-list-view">
+          {tipsLi}
+        </ul>
+      </div>
     );
   }
 }

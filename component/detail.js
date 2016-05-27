@@ -11,7 +11,7 @@ export default class Detail extends Component {
   render(){
     const { topic } = this.props
     return (
-      <div className="content">
+      <div className="aui-content content">
         <h1>{topic.title}</h1>
         <p><div dangerouslySetInnerHTML={{__html: topic.content}}></div></p>
       </div>
